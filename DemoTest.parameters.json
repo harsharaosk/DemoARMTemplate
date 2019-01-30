@@ -94,9 +94,6 @@
     "lbName": {
       "value": "[concat(parameters('vmssName'),'-lb')]"
     },
-    "publicIPAddressName": {
-      "value": "[concat(parameters('vmssName'),'-pip')]"
-    },
     "publicIPAllocationMethod": {
       "value": "Dynamic"
     },

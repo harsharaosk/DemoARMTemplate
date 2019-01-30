@@ -48,6 +48,12 @@
 				"description": "Destination Address Range of the Security Rule, can be any existing network/subnets."
 			}
 		},
+		"securityRules.properties.sourceAddressPrefix": {
+			"type": "string",
+			"metadata": {
+				"description": "Destination Address Range of the Security Rule, can be any existing network/subnets."
+			}
+		},
 		"securityRules.properties.destinationAddressPrefix": {
 			"type": "string",
 			"metadata": {
