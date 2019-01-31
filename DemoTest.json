@@ -272,11 +272,11 @@
 					"subnetPrefix": {
 						"value": "[parameters('azureFirewallSubnetPrefix')]"
 					}
-				},
-				"dependsOn": [
-					"VnetDeployment"
-				]
-			}
+				}
+			},
+			"dependsOn": [
+				"VnetDeployment"
+			]
 		},
 		{
 			"apiVersion": "2017-05-10",
@@ -294,11 +294,11 @@
 					"firewallSubnetName": {
 						"value": "[parameters('firewallSubnetName')]"
 					}
-				},
-				"dependsOn": [
-					"VnetDeployment"
-				]
-			}
+				}
+			},
+			"dependsOn": [
+				"VnetDeployment"
+			]
 		}
 	]
 }
