@@ -128,34 +128,51 @@
 			"type": "string",
 			"defaultValue": "Standard_LRS",
 			"allowedValues": [
-			  "Standard_LRS",
-			  "Standard_GRS",
-			  "Standard_ZRS",
-			  "Premium_LRS"
+				"Standard_LRS",
+				"Standard_GRS",
+				"Standard_ZRS",
+				"Premium_LRS"
 			],
 			"metadata": {
-			  "description": "Type of the Storage Account, please choose from allowed values"
+				"description": "Type of the Storage Account, please choose from allowed values"
 			}
-		  },
-		  "storageAccountName": {
+		},
+		"storageAccountName": {
 			"type": "string",
 			"metadata": {
-			  "description": "Name of the Storage Account, must be unique as it has a FQDN"
+				"description": "Name of the Storage Account, must be unique as it has a FQDN"
 			}
-		  },
-		  "storageAccountKind": {
+		},
+		"storageAccountKind": {
 			"type": "string",
 			"allowedValues": [
-			  "Storage",
-			  "StorageV2",
-			  "BlobStorage",
-			  "FileStorage",
-			  "BlockBlobStorage"
+				"Storage",
+				"StorageV2",
+				"BlobStorage",
+				"FileStorage",
+				"BlockBlobStorage"
 			],
 			"metadata": {
-			  "description": "Storage Account kind"
+				"description": "Storage Account kind"
 			}
-		  }
+		},
+		"publicIPAddressName": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Public IP Address"
+			}
+		},
+		"publicIPAllocationMethod": {
+			"type": "string",
+			"defaultValue":"Dynamic",
+			"allowedValues": [
+				"Static",
+				"Dynamic"
+			],
+			"metadata": {
+				"description": "Allocation method of the Public IP Address, must be either Static or Dynamic Allocation"
+			}
+		},
 	},
 	"variables": {
 		"templateBaseUrl": "https://raw.githubusercontent.com/rangerlynch7/DemoARMTemplate/master/",
@@ -164,10 +181,12 @@
 		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]",
 		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]",
 		"firewallSubnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'FirewallSubnet.json')]",
-		"azFirewallTemplateUrl":"[concat(variables('templateBaseUrl'), 'AzureFirewall.json')]",
-		"storageAccountTemplateUrl":"[concat(variables('templateBaseUrl'), 'StorageAccount.json')]"
+		"azFirewallTemplateUrl": "[concat(variables('templateBaseUrl'), 'AzureFirewall.json')]",
+		"storageAccountTemplateUrl": "[concat(variables('templateBaseUrl'), 'StorageAccount.json')]",
+		"publicIPAddressName":"[concat(parameters('vmssName'), '-pip')]"
 	},
-	"resources": [{
+	"resources": [
+		{
 			"apiVersion": "2017-05-10",
 			"name": "VnetDeployment",
 			"type": "Microsoft.Resources/deployments",
@@ -353,6 +372,28 @@
 					},
 					"storageAccountKind": {
 						"value": "[parameters('storageAccountKind')]"
+					}
+				}
+			}
+		},
+		{
+			"apiVersion": "2017-05-10",
+			"name": "publicIPDeployment",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('publicIPTemplateUrl')]"
+				},
+				"parameters": {
+					"publicIPAddressName": {
+						"value": "[variables('publicIPAddressName')]"
+					},
+					"publicIPAllocationMethod": {
+						"value": "[parameters('publicIPAllocationMethod')]"
+					},
+					"vmssName": {
+						"value": "[parameters('vmssName')]"
 					}
 				}
 			}

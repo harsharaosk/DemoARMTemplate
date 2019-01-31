@@ -10,12 +10,19 @@
 		},
 		"publicIPAllocationMethod": {
 			"type": "string",
+			"defaultValue":"Dynamic",
 			"allowedValues": [
 				"Static",
 				"Dynamic"
 			],
 			"metadata": {
 				"description": "Allocation method of the Public IP Address, must be either Static or Dynamic Allocation"
+			}
+		},
+		"vmssName": {
+			"type": "string",
+			"metadata": {
+				"description": "vmss Name for the public ip to use as a domain label"
 			}
 		}
 	},
