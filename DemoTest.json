@@ -390,28 +390,6 @@
 		},
 		{
 			"apiVersion": "2017-05-10",
-			"name": "publicIPDeployment",
-			"type": "Microsoft.Resources/deployments",
-			"properties": {
-				"mode": "Incremental",
-				"templateLink": {
-					"uri": "[variables('publicIPTemplateUrl')]"
-				},
-				"parameters": {
-					"publicIPAddressName": {
-						"value": "[parameters('publicIPAddressName')]"
-					},
-					"publicIPAllocationMethod": {
-						"value": "[parameters('publicIPAllocationMethod')]"
-					},
-					"vmssName": {
-						"value": "[parameters('vmssName')]"
-					}
-				}
-			}
-		},
-		{
-			"apiVersion": "2017-05-10",
 			"name": "lbDeployment",
 			"type": "Microsoft.Resources/deployments",
 			"properties": {
@@ -427,10 +405,7 @@
 						"value": "[parameters('publicIPAddressName')]"
 					}
 				}
-			},
-			"dependsOn": [
-				"publicIPDeployment"
-			]
+			}
 		}
 	]
 }

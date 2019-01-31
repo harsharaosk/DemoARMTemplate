@@ -13,6 +13,13 @@
       "metadata": {
         "description": "Name of the Load Balancer"
       }
+    },
+    "publicIPAllocationMethod": {
+      "type": "string",
+      "defaultValue":"dynamic",
+      "metadata": {
+        "description": "Name of the Load Balancer"
+      }
     }
   },
   "variables": {
@@ -93,6 +100,18 @@
             }
           }
         ]
+      }
+    },
+    {
+      "apiVersion": "2017-06-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('publicIPAddressName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "publicIPAllocationMethod": "[parameters('publicIPAllocationMethod')]",
+        "dnsSettings": {
+          "domainNameLabel": "[toLower(parameters('vmssName'))]"
+        }
       }
     }
   ]
