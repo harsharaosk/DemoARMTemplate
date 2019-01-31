@@ -110,14 +110,28 @@
 			"metadata": {
 				"description": "Name of the Route table for external firewall connectivity."
 			}
-		}
+		},
+		"firewallSubnetName": {
+			"type": "string",
+			"defaultvalue":"AzureFirewallSubnet",
+			"metadata": {
+				"description": "Firewall subnet name"
+			}
+		},
+		"azureFirewallSubnetPrefix": {
+			"type": "string",
+			"metadata": {
+				"description": "Address Prefix of the Firewall subnet, prefer to have 10.x.255.0/24 as a standard practice"
+			}
+		},
 	},
 	"variables": {
 		"templateBaseUrl": "https://raw.githubusercontent.com/rangerlynch7/DemoARMTemplate/master/",
 		"virtualNetworkTemplateUrl": "[concat(variables('templateBaseUrl'), 'VirtualNetwork.json')]",
 		"nsgTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkSecurityGroup.json')]",
 		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]",
-		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]"
+		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]",
+		"firewallSubnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'FirewallSubnet.json')]"
 	},
 	"resources": [
 		{
@@ -236,6 +250,34 @@
 			"nsgDeployment",
 			"routeTableDeployment"
 		]
-	}
+	},
+	{
+		"apiVersion": "2017-05-10",
+		"name": "firewallSubnetDeployment",
+		"type": "Microsoft.Resources/deployments",
+		"properties": {
+			"mode": "Incremental",
+			"templateLink": {
+				"uri": "[variables('firewallSubnetTemplateUrl')]"
+			},
+			"parameters": {
+				"vnetName": {
+					"value": "[parameters('vnetName')]"
+				},
+				"vnetAddressPrefix": {
+					"value": "[parameters('vnetAddressPrefix')]"
+				},
+				"subnetName": {
+					"value": "[parameters('firewallSubnetName')]"
+				},
+				"subnetPrefix": {
+					"value": "[parameters('azureFirewallSubnetPrefix')]"
+				}
+			}
+		},
+		"dependsOn": [
+			"VnetDeployment"
+		]
+	},
 ]
 }
