@@ -188,8 +188,7 @@
 		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]",
 		"firewallSubnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'FirewallSubnet.json')]",
 		"azFirewallTemplateUrl": "[concat(variables('templateBaseUrl'), 'AzureFirewall.json')]",
-		"storageAccountTemplateUrl": "[concat(variables('templateBaseUrl'), 'StorageAccount.json')]",
-		"publicIPAddressName": "[concat(parameters('vmssName'), '-pip')]"
+		"storageAccountTemplateUrl": "[concat(variables('templateBaseUrl'), 'StorageAccount.json')]"
 	},
 	"resources": [{
 			"apiVersion": "2017-05-10",
