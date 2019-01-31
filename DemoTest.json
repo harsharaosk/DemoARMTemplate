@@ -164,7 +164,7 @@
 		},
 		"publicIPAllocationMethod": {
 			"type": "string",
-			"defaultValue":"Dynamic",
+			"defaultValue": "Dynamic",
 			"allowedValues": [
 				"Static",
 				"Dynamic"
@@ -173,6 +173,12 @@
 				"description": "Allocation method of the Public IP Address, must be either Static or Dynamic Allocation"
 			}
 		},
+		"lbName": {
+			"type": "string",
+			"metadata": {
+			  "description": "Name of the Load Balancer"
+			}
+		  }
 	},
 	"variables": {
 		"templateBaseUrl": "https://raw.githubusercontent.com/rangerlynch7/DemoARMTemplate/master/",
@@ -183,10 +189,9 @@
 		"firewallSubnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'FirewallSubnet.json')]",
 		"azFirewallTemplateUrl": "[concat(variables('templateBaseUrl'), 'AzureFirewall.json')]",
 		"storageAccountTemplateUrl": "[concat(variables('templateBaseUrl'), 'StorageAccount.json')]",
-		"publicIPAddressName":"[concat(parameters('vmssName'), '-pip')]"
+		"publicIPAddressName": "[concat(parameters('vmssName'), '-pip')]"
 	},
-	"resources": [
-		{
+	"resources": [{
 			"apiVersion": "2017-05-10",
 			"name": "VnetDeployment",
 			"type": "Microsoft.Resources/deployments",
@@ -397,6 +402,25 @@
 					}
 				}
 			}
+		},
+		{
+			"apiVersion": "2017-05-10",
+			"name": "lbDeployment",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('lbTemplateUrl')]"
+				},
+				"parameters": {
+					"lbName": {
+						"value": "[parameters('lbName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"publicIPDeployment"
+			]
 		}
 	]
 }

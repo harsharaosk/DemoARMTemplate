@@ -58,6 +58,9 @@
     },
     "storageAccountKind": {
       "value": "StorageV2"
+    },
+    "lbName": {
+      "value": "[concat(parameters('vmssName'),'-lb')]"
     }
   }
 }
