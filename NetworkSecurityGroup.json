@@ -8,12 +8,6 @@
 				"description": "Name of the Network Security Group."
 			}
 		},
-		"subnetPrefix": {
-			"type": "string",
-			"metadata": {
-				"description": "The IP Address pool for the Subnet in CIDR format."
-			}
-		},
 		"securityRules.Name": {
 			"type": "string",
 			"metadata": {
