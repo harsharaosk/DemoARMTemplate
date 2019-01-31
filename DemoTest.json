@@ -123,7 +123,39 @@
 			"metadata": {
 				"description": "Address Prefix of the Firewall subnet, prefer to have 10.x.255.0/24 as a standard practice"
 			}
-		}
+		},
+		"storageAccountType": {
+			"type": "string",
+			"defaultValue": "Standard_LRS",
+			"allowedValues": [
+			  "Standard_LRS",
+			  "Standard_GRS",
+			  "Standard_ZRS",
+			  "Premium_LRS"
+			],
+			"metadata": {
+			  "description": "Type of the Storage Account, please choose from allowed values"
+			}
+		  },
+		  "storageAccountName": {
+			"type": "string",
+			"metadata": {
+			  "description": "Name of the Storage Account, must be unique as it has a FQDN"
+			}
+		  },
+		  "storageAccountKind": {
+			"type": "string",
+			"allowedValues": [
+			  "Storage",
+			  "StorageV2",
+			  "BlobStorage",
+			  "FileStorage",
+			  "BlockBlobStorage"
+			],
+			"metadata": {
+			  "description": "Storage Account kind"
+			}
+		  }
 	},
 	"variables": {
 		"templateBaseUrl": "https://raw.githubusercontent.com/rangerlynch7/DemoARMTemplate/master/",
@@ -132,7 +164,8 @@
 		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]",
 		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]",
 		"firewallSubnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'FirewallSubnet.json')]",
-		"azFirewallTemplateUrl":"[concat(variables('templateBaseUrl'), 'AzureFirewall.json')]"
+		"azFirewallTemplateUrl":"[concat(variables('templateBaseUrl'), 'AzureFirewall.json')]",
+		"storageAccountTemplateUrl":"[concat(variables('templateBaseUrl'), 'StorageAccount.json')]"
 	},
 	"resources": [{
 			"apiVersion": "2017-05-10",
@@ -298,8 +331,31 @@
 				}
 			},
 			"dependsOn": [
+				"VnetDeployment",
 				"firewallSubnetDeployment"
 			]
+		},
+		{
+			"apiVersion": "2017-05-10",
+			"name": "storageAccountDeployment",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('storageAccountTemplateUrl')]"
+				},
+				"parameters": {
+					"storageAccountName": {
+						"value": "[parameters('storageAccountName')]"
+					},
+					"storageAccountType": {
+						"value": "[parameters('storageAccountType')]"
+					},
+					"storageAccountKind": {
+						"value": "[parameters('storageAccountKind')]"
+					}
+				}
+			}
 		}
 	]
 }

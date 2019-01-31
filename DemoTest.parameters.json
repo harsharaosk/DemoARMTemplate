@@ -49,6 +49,15 @@
     },
     "azureFirewallSubnetPrefix": {
       "value": "10.200.255.0/24"
+    },
+    "storageAccountName": {
+      "value": "nischitharchtest7736"
+    },
+    "storageAccountType": {
+      "value": "Standard_LRS"
+    },
+    "storageAccountKind": {
+      "value": "StorageV2"
     }
   }
 }
