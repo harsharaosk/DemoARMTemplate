@@ -517,6 +517,9 @@
 					},
 					"imageReference.version": {
 						"value": "[parameters('imageReference.version')]"
+					},
+					"lbName": {
+						"value": "[parameters('lbName')]"
 					}
 				}
 			},
@@ -583,6 +586,9 @@
 				"parameters": {
 					"publicIPAddressName": {
 						"value": "[variables('publicIPAddressName')]"
+					},
+					"publicIPAllocationMethod": {
+						"value": "[variables('publicIPAllocationMethod')]"
 					}
 				}
 			}
