@@ -7,6 +7,36 @@
     },
     "vnetAddressPrefix": {
       "value": "10.200.0.0/16"
+    },
+    "nsgName": {
+      "value": "subnet1-nsg"
+    },
+    "securityRules.Name": {
+      "value": "ssh-access"
+    },
+    "securityRules.properties.protocol": {
+      "value": "TCP"
+    },
+    "securityRules.properties.sourcePortRange": {
+      "value": "*"
+    },
+    "securityRules.properties.destinationPortRange": {
+      "value": "22"
+    },
+    "securityRules.properties.sourceAddressPrefix": {
+      "value": "*"
+    },
+    "securityRules.properties.destinationAddressPrefix": {
+      "value": "*"
+    },
+    "securityRules.properties.access": {
+      "value": "Allow"
+    },
+    "securityRules.properties.priority": {
+      "value": "100"
+    },
+    "securityRules.properties.direction": {
+      "value": "Inbound"
     }
-}
+  }
 }

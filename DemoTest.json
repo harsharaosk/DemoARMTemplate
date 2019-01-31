@@ -13,13 +13,87 @@
 			"metadata": {
 				"description": "The IP Address pool for the virtual network in CIDR format."
 			}
+		},
+		"nsgName": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Network Security Group."
+			}
+		},
+		"securityRules.Name": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Security Rule."
+			}
+		},
+		"securityRules.properties.protocol": {
+			"type": "string",
+			"allowedValues": [
+				"TCP",
+				"UDP"
+			],
+			"metadata": {
+				"description": "Protocol of the Security Rule, select from allowed values."
+			}
+		},
+		"securityRules.properties.sourcePortRange": {
+			"type": "string",
+			"metadata": {
+				"description": "Source Address Range of the Security Rule, can be Internet or any exisitng network/subnets."
+			}
+		},
+		"securityRules.properties.destinationPortRange": {
+			"type": "string",
+			"metadata": {
+				"description": "Destination Address Range of the Security Rule, can be any existing network/subnets."
+			}
+		},
+		"securityRules.properties.sourceAddressPrefix": {
+			"type": "string",
+			"metadata": {
+				"description": "Destination Address Range of the Security Rule, can be any existing network/subnets."
+			}
+		},
+		"securityRules.properties.destinationAddressPrefix": {
+			"type": "string",
+			"metadata": {
+				"description": "The Destination IP Address pool for the NSG in CIDR format."
+			}
+		},
+		"securityRules.properties.access": {
+			"type": "string",
+			"allowedValues": [
+				"Allow",
+				"Deny"
+			],
+			"metadata": {
+				"description": "Access type of the NSG, either Allow or Deny traffic."
+			}
+		},
+		"securityRules.properties.priority": {
+			"type": "string",
+			"metadata": {
+				"description": "Priority number of the rule, preferably have the format in hundreds, eg: 100,200,300 etc."
+			}
+		},
+		"securityRules.properties.direction": {
+			"type": "string",
+			"allowedValues": [
+				"Inbound",
+				"Outbound"
+			],
+			"metadata": {
+				"description": "Direction allowed by the Security group for traffic flow, could be either Inbound or Outbound"
+			}
 		}
 	},
 	"variables": {
 		"templateBaseUrl": "https://raw.githubusercontent.com/rangerlynch7/DemoARMTemplate/master/",
-		"virtualNetworkTemplateUrl": "[concat(variables('templateBaseUrl'), 'VirtualNetwork.json')]"
+		"virtualNetworkTemplateUrl": "[concat(variables('templateBaseUrl'), 'VirtualNetwork.json')]",
+		"nsgTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkSecurityGroup.json')]"
 	},
-	"resources": [{
+	"resources": [
+		{
 		"apiVersion": "2017-05-10",
 		"name": "VnetDeployment",
 		"type": "Microsoft.Resources/deployments",
@@ -37,5 +111,49 @@
 				}
 			}
 		}
-	}]
+	},
+	{
+		"apiVersion": "2017-05-10",
+		"name": "nsgDeployment",
+		"type": "Microsoft.Resources/deployments",
+		"properties": {
+			"mode": "Incremental",
+			"templateLink": {
+				"uri": "[variables('nsgTemplateUrl')]"
+			},
+			"parameters": {
+				"nsgName": {
+					"value": "[parameters('nsgName')]"
+				},
+				"securityRules.Name": {
+					"value": "[parameters('securityRules.Name')]"
+				},
+				"securityRules.properties.protocol": {
+					"value": "[variables('securityRules.properties.protocol')]"
+				},
+				"securityRules.properties.sourcePortRange": {
+					"value": "[parameters('securityRules.properties.sourcePortRange')]"
+				},
+				"securityRules.properties.destinationPortRange": {
+					"value": "[variables('securityRules.properties.destinationPortRange')]"
+				},
+				"securityRules.properties.sourceAddressPrefix": {
+					"value": "[parameters('subnetPrefix')]"
+				},
+				"securityRules.properties.destinationAddressPrefix": {
+					"value": "[variables('securityRules.properties.destinationAddressPrefix')]"
+				},
+				"securityRules.properties.access": {
+					"value": "[parameters('securityRules.properties.access')]"
+				},
+				"securityRules.properties.priority": {
+					"value": "[parameters('securityRules.properties.priority')]"
+				},
+				"securityRules.properties.direction": {
+					"value": "[parameters('securityRules.properties.direction')]"
+				}
+			}
+		}
+	}
+]
 }
