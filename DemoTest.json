@@ -131,7 +131,8 @@
 		"nsgTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkSecurityGroup.json')]",
 		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]",
 		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]",
-		"firewallSubnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'FirewallSubnet.json')]"
+		"firewallSubnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'FirewallSubnet.json')]",
+		"azFirewallTemplateUrl":"[concat(variables('templateBaseUrl'), 'AzureFirewall.json')]"
 	},
 	"resources": [{
 			"apiVersion": "2017-05-10",
@@ -297,7 +298,7 @@
 				}
 			},
 			"dependsOn": [
-				"VnetDeployment"
+				"firewallSubnetDeployment"
 			]
 		}
 	]
