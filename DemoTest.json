@@ -129,19 +129,19 @@
 					"value": "[parameters('securityRules.Name')]"
 				},
 				"securityRules.properties.protocol": {
-					"value": "[variables('securityRules.properties.protocol')]"
+					"value": "[parameters('securityRules.properties.protocol')]"
 				},
 				"securityRules.properties.sourcePortRange": {
 					"value": "[parameters('securityRules.properties.sourcePortRange')]"
 				},
 				"securityRules.properties.destinationPortRange": {
-					"value": "[variables('securityRules.properties.destinationPortRange')]"
+					"value": "[parameters('securityRules.properties.destinationPortRange')]"
 				},
 				"securityRules.properties.sourceAddressPrefix": {
 					"value": "[parameters('subnetPrefix')]"
 				},
 				"securityRules.properties.destinationAddressPrefix": {
-					"value": "[variables('securityRules.properties.destinationAddressPrefix')]"
+					"value": "[parameters('securityRules.properties.destinationAddressPrefix')]"
 				},
 				"securityRules.properties.access": {
 					"value": "[parameters('securityRules.properties.access')]"
