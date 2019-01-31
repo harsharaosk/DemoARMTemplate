@@ -393,7 +393,7 @@
 				},
 				"parameters": {
 					"publicIPAddressName": {
-						"value": "[variables('publicIPAddressName')]"
+						"value": "[parameters('publicIPAddressName')]"
 					},
 					"publicIPAllocationMethod": {
 						"value": "[parameters('publicIPAllocationMethod')]"
