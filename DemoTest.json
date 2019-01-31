@@ -274,7 +274,7 @@
 					}
 				},
 				"dependsOn": [
-					"VnetDeployment",
+					"VnetDeployment"
 				]
 			}
 		},
@@ -296,7 +296,7 @@
 					}
 				},
 				"dependsOn": [
-					"VnetDeployment",
+					"VnetDeployment"
 				]
 			}
 		}
