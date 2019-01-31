@@ -273,10 +273,7 @@
 						"value": "[parameters('azureFirewallSubnetPrefix')]"
 					}
 				}
-			},
-			"dependsOn": [
-				"VnetDeployment"
-			]
+			}
 		}
 	]
 }
