@@ -383,7 +383,7 @@
 						"value": "[parameters('vnetAddressPrefix')]"
 					},
 					"subnetName": {
-						"value": "[variables('subnetName')]"
+						"value": "[parameters('subnetName')]"
 					},
 					"subnetPrefix": {
 						"value": "[parameters('subnetPrefix')]"

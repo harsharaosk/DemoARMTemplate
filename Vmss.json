@@ -68,18 +68,6 @@
         "description": "Admin password on all VMs."
       }
     },
-    "vnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "vName of the existing virtual network to deploy the scale set into."
-      }
-    },
-    "subnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the existing subnet to deploy the scale set into."
-      }
-    },
     "imageReference.publisher": {
       "type": "string",
       "metadata": {
