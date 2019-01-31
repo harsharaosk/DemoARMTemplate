@@ -138,7 +138,7 @@
 					"value": "[parameters('securityRules.properties.destinationPortRange')]"
 				},
 				"securityRules.properties.sourceAddressPrefix": {
-					"value": "[parameters('subnetPrefix')]"
+					"value": "[parameters('securityRules.properties.sourceAddressPrefix')]"
 				},
 				"securityRules.properties.destinationAddressPrefix": {
 					"value": "[parameters('securityRules.properties.destinationAddressPrefix')]"
