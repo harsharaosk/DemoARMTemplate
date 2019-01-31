@@ -106,7 +106,7 @@
 		},
 		"azfwRouteTableName": {
 			"type": "string",
-			"deafultvalue":"azfwRouteTable",
+			"defaultvalue":"azfwRouteTable",
 			"metadata": {
 				"description": "Name of the Route table for external firewall connectivity."
 			}
