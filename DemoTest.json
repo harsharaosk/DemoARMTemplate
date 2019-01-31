@@ -85,12 +85,19 @@
 			"metadata": {
 				"description": "Direction allowed by the Security group for traffic flow, could be either Inbound or Outbound"
 			}
+		},
+		"nextHopIP": {
+			"type": "string",
+			"metadata": {
+				"description": "The next hop ip, this should be an address in the firewall subnet"
+			}
 		}
 	},
 	"variables": {
 		"templateBaseUrl": "https://raw.githubusercontent.com/rangerlynch7/DemoARMTemplate/master/",
 		"virtualNetworkTemplateUrl": "[concat(variables('templateBaseUrl'), 'VirtualNetwork.json')]",
-		"nsgTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkSecurityGroup.json')]"
+		"nsgTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkSecurityGroup.json')]",
+		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]"
 	},
 	"resources": [
 		{
@@ -151,6 +158,22 @@
 				},
 				"securityRules.properties.direction": {
 					"value": "[parameters('securityRules.properties.direction')]"
+				}
+			}
+		}
+	},
+	{
+		"apiVersion": "2017-05-10",
+		"name": "routeTableDeployment",
+		"type": "Microsoft.Resources/deployments",
+		"properties": {
+			"mode": "Incremental",
+			"templateLink": {
+				"uri": "[variables('routeTableTemplateUrl')]"
+			},
+			"parameters": {
+				"nextHopIP": {
+					"value": "[parameters('nextHopIP')]"
 				}
 			}
 		}

@@ -37,6 +37,9 @@
     },
     "securityRules.properties.direction": {
       "value": "Inbound"
+    },
+    "nextHopIP": {
+      "value": "10.200.255.4"
     }
   }
 }
