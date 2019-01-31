@@ -117,9 +117,7 @@
 		"virtualNetworkTemplateUrl": "[concat(variables('templateBaseUrl'), 'VirtualNetwork.json')]",
 		"nsgTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkSecurityGroup.json')]",
 		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]",
-		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]",
-		"azfwRouteTableName": "AzfwRouteTable"
-
+		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]"
 	},
 	"resources": [
 		{
@@ -196,6 +194,9 @@
 			"parameters": {
 				"nextHopIP": {
 					"value": "[parameters('nextHopIP')]"
+				},
+				"azfwRouteTableName": {
+					"value": "[parameters('azfwRouteTableName')]"
 				}
 			}
 		}
@@ -224,6 +225,9 @@
 				},
 				"nsgName": {
 					"value": "[parameters('nsgName')]"
+				},
+				"azfwRouteTableName": {
+					"value": "[parameters('azfwRouteTableName')]"
 				}
 			}
 		},
