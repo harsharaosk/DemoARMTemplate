@@ -59,6 +59,9 @@
     "storageAccountKind": {
       "value": "StorageV2"
     },
+    "vmssName": {
+      "value": "demovmss"
+    },
     "lbName": {
       "value": "[concat(parameters('vmssName'),'-lb')]"
     },

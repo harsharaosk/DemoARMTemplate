@@ -178,6 +178,12 @@
 			"metadata": {
 			  "description": "Name of the Load Balancer"
 			}
+		  },
+		  "vmssName": {
+			"type": "string",
+			"metadata": {
+			  "description": "Name of the Virtual Machine Scale Set"
+			}
 		  }
 	},
 	"variables": {
