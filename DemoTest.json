@@ -103,6 +103,13 @@
 			"metadata": {
 				"description": "The IP Address pool for the Subnet in CIDR format."
 			}
+		},
+		"azfwRouteTableName": {
+			"type": "string",
+			"deafultvalue":"azfwRouteTable",
+			"metadata": {
+				"description": "Name of the Route table for external firewall connectivity."
+			}
 		}
 	},
 	"variables": {
