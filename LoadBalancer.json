@@ -7,11 +7,16 @@
       "metadata": {
         "description": "Name of the Load Balancer"
       }
+    },
+    "publicIPAddressName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Load Balancer"
+      }
     }
   },
   "variables": {
-    "publicIPAddressName":"[concat(parameters('lbName'),'-pip')]",
-    "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
+    "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
     "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
     "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",

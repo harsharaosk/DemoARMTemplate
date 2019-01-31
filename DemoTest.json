@@ -422,6 +422,9 @@
 				"parameters": {
 					"lbName": {
 						"value": "[parameters('lbName')]"
+					},
+					"publicIPAddressName": {
+						"value": "[parameters('publicIPAddressName')]"
 					}
 				}
 			},
