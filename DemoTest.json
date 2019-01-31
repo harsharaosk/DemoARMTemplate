@@ -199,12 +199,6 @@
 		"type": "Microsoft.Resources/deployments",
 		"properties": {
 			"mode": "Incremental",
-			"networkSecurityGroup": {
-				"id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
-			},
-			"routeTable": {
-				"id": "[resourceId('Microsoft.Network/routeTables', variables('azfwRouteTableName'))]"
-			},
 			"templateLink": {
 				"uri": "[variables('subnetTemplateUrl')]"
 			},
@@ -220,6 +214,9 @@
 				},
 				"subnetPrefix": {
 					"value": "[parameters('subnetPrefix')]"
+				},
+				"nsgName": {
+					"value": "[parameters('nsgName')]"
 				}
 			}
 		},
