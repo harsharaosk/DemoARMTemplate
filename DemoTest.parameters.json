@@ -63,10 +63,10 @@
       "value": "demovmss"
     },
     "lbName": {
-      "value": "[concat(parameters('vmssName'),'-lb')]"
+      "value": "demovmss-lb"
     },
     "publicIPAddressName": {
-      "value": "[concat(parameters('vmssName'), '-pip')"
+      "value": "demovmss-pip"
     }
   }
 }

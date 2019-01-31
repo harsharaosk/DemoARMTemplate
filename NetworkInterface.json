@@ -53,7 +53,7 @@
 						"id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool1')]"
 					}],
 					"loadBalancerInboundNatRules": [{
-						"id": "[concat(variables('lbID'),'/inboundNatRules/RDP-VM', copyindex(1))]"
+						"id": "[concat(variables('lbID'),'/inboundNatRules/ssh', copyindex(1))]"
 					}]
 				}
 			}]
