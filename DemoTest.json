@@ -272,7 +272,32 @@
 					"subnetPrefix": {
 						"value": "[parameters('azureFirewallSubnetPrefix')]"
 					}
-				}
+				},
+				"dependsOn": [
+					"VnetDeployment",
+				]
+			}
+		},
+		{
+			"apiVersion": "2017-05-10",
+			"name": "azFirewallDeployment",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('azFirewallTemplateUrl')]"
+				},
+				"parameters": {
+					"vnetName": {
+						"value": "[parameters('vnetName')]"
+					},
+					"firewallSubnetName": {
+						"value": "[parameters('firewallSubnetName')]"
+					}
+				},
+				"dependsOn": [
+					"VnetDeployment",
+				]
 			}
 		}
 	]
