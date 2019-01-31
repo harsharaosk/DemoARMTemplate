@@ -40,6 +40,12 @@
     },
     "nextHopIP": {
       "value": "10.200.255.4"
+    },
+    "subnetName": {
+      "value": "subnet1"
+    },
+    "subnetPrefix": {
+      "value": "10.200.1.0/24"
     }
   }
 }

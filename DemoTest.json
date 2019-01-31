@@ -91,13 +91,28 @@
 			"metadata": {
 				"description": "The next hop ip, this should be an address in the firewall subnet"
 			}
+		},
+		"subnetName": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Subnet"
+			}
+		},
+		"subnetPrefix": {
+			"type": "string",
+			"metadata": {
+				"description": "The IP Address pool for the Subnet in CIDR format."
+			}
 		}
 	},
 	"variables": {
 		"templateBaseUrl": "https://raw.githubusercontent.com/rangerlynch7/DemoARMTemplate/master/",
 		"virtualNetworkTemplateUrl": "[concat(variables('templateBaseUrl'), 'VirtualNetwork.json')]",
 		"nsgTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkSecurityGroup.json')]",
-		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]"
+		"routeTableTemplateUrl": "[concat(variables('templateBaseUrl'), 'RouteTable.json')]",
+		"subnetTemplateUrl": "[concat(variables('templateBaseUrl'), 'Subnet.json')]",
+		"azfwRouteTableName": "AzfwRouteTable"
+
 	},
 	"resources": [
 		{
@@ -177,6 +192,42 @@
 				}
 			}
 		}
+	},
+	{
+		"apiVersion": "2017-05-10",
+		"name": "SubnetDeployment",
+		"type": "Microsoft.Resources/deployments",
+		"properties": {
+			"mode": "Incremental",
+			"networkSecurityGroup": {
+				"id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+			},
+			"routeTable": {
+				"id": "[resourceId('Microsoft.Network/routeTables', variables('azfwRouteTableName'))]"
+			},
+			"templateLink": {
+				"uri": "[variables('subnetTemplateUrl')]"
+			},
+			"parameters": {
+				"vnetName": {
+					"value": "[parameters('vnetName')]"
+				},
+				"vnetAddressPrefix": {
+					"value": "[parameters('vnetAddressPrefix')]"
+				},
+				"subnetName": {
+					"value": "[parameters('subnetName')]"
+				},
+				"subnetPrefix": {
+					"value": "[parameters('subnetPrefix')]"
+				}
+			}
+		},
+		"dependsOn": [
+			"VnetDeployment",
+			"nsgDeployment",
+			"routeTableDeployment"
+		]
 	}
 ]
 }
