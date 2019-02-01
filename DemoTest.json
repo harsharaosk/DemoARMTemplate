@@ -522,7 +522,10 @@
 						"value": "[parameters('lbName')]"
 					}
 				}
-			}
+			},
+			"dependsOn": [
+				"lbDeployment"
+			]
 		}
 	]
 }

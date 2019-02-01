@@ -91,9 +91,6 @@
 			"name": "[parameters('vmssName')]",
 			"location": "[resourceGroup().location]",
 			"apiVersion": "2017-03-30",
-			"dependsOn": [
-				"[resourceId('Microsoft.Network/loadBalancers', parameters('lbName'))]"
-			],
 			"sku": {
 				"name": "[parameters('vmSku')]",
 				"capacity": "[parameters('instanceCount')]"
