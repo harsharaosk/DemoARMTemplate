@@ -523,34 +523,6 @@
 					}
 				}
 			}
-		},
-		{
-			"apiVersion": "2017-05-10",
-			"name": "nicDeployment",
-			"type": "Microsoft.Resources/deployments",
-			"properties": {
-				"mode": "Incremental",
-				"templateLink": {
-					"uri": "[variables('nicTemplateUrl')]"
-				},
-				"parameters": {
-					"vnetName": {
-						"value": "[parameters('vnetName')]"
-					},
-					"subnetName": {
-						"value": "[parameters('subnetName')]"
-					},
-					"vmssName": {
-						"value": "[parameters('vmssName')]"
-					},
-					"lbName": {
-						"value": "[parameters('lbName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"lbDeployment"
-			]
 		}
 	]
 }

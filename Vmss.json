@@ -81,42 +81,78 @@
 			}
 		}
 	},
-	"resources": [{
-		"type": "Microsoft.Compute/virtualMachineScaleSets",
-		"name": "[parameters('vmssName')]",
-		"location": "[resourceGroup().location]",
-		"apiVersion": "2017-03-30",
-		"dependsOn": [
-			"[resourceId('Microsoft.Network/loadBalancers', parameters('lbName'))]"
-		],
-		"sku": {
-			"name": "[parameters('vmSku')]",
-			"capacity": "[parameters('instanceCount')]"
-		},
-		"properties": {
-			"overprovision": true,
-			"upgradePolicy": {
-				"mode": "Manual"
+	"variables":{
+		"loadBalancerBackEndName": "loadBalancerBackEnd",
+		"loadBalancerNatPoolName": "loadBalancerNatPool"
+	},
+	"resources": [
+		{
+			"type": "Microsoft.Compute/virtualMachineScaleSets",
+			"name": "[parameters('vmssName')]",
+			"location": "[resourceGroup().location]",
+			"apiVersion": "2017-03-30",
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/loadBalancers', parameters('lbName'))]"
+			],
+			"sku": {
+				"name": "[parameters('vmSku')]",
+				"capacity": "[parameters('instanceCount')]"
 			},
-			"virtualMachineProfile": {
-				"storageProfile": {
-					"osDisk": {
-						"createOption": "FromImage",
-						"caching": "ReadWrite"
-					},
-					"imageReference": {
-						"publisher": "[parameters('imageReference.publisher')]",
-						"offer": "[parameters('imageReference.offer')]",
-						"sku": "[parameters('imageReference.sku')]",
-						"version": "[parameters('imageReference.version')]"
-					}
+			"properties": {
+				"overprovision": true,
+				"upgradePolicy": {
+					"mode": "Manual"
 				},
-				"osProfile": {
-					"computerNamePrefix": "[parameters('vmssName')]",
-					"adminUsername": "[parameters('adminUsername')]",
-					"adminPassword": "[parameters('adminPassword')]"
+				"virtualMachineProfile": {
+					"storageProfile": {
+						"osDisk": {
+							"createOption": "FromImage",
+							"caching": "ReadWrite"
+						},
+						"imageReference": {
+							"publisher": "[parameters('imageReference.publisher')]",
+							"offer": "[parameters('imageReference.offer')]",
+							"sku": "[parameters('imageReference.sku')]",
+							"version": "[parameters('imageReference.version')]"
+						}
+					},
+					"osProfile": {
+						"computerNamePrefix": "[parameters('vmssName')]",
+						"adminUsername": "[parameters('adminUsername')]",
+						"adminPassword": "[parameters('adminPassword')]"
+					},
+					"networkProfile": {
+						"networkInterfaceConfigurations": [
+							{
+								"name": "nic",
+								"properties": {
+									"primary": true,
+									"ipConfigurations": [
+										{
+											"name": "ipconfig",
+											"properties": {
+												"subnet": {
+													"id": "[resourceId(parameters('vnetName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+												},
+												"loadBalancerBackendAddressPools": [
+													{
+														"id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/loadBalancers/', parameters('lbName'), '/backendAddressPools/', variables('loadBalancerBackEndName'))]"
+													}
+												],
+												"loadBalancerInboundNatPools": [
+													{
+														"id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/loadBalancers/', parameters('lbName'), '/inboundNatPools/', variables('loadBalancerNatPoolName'))]"
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						]
+					}
 				}
 			}
 		}
-	}]
+	]
 }
