@@ -265,8 +265,7 @@
 		"vmssTemplateUrl": "[concat(variables('templateBaseUrl'), 'Vmss.json')]",
 		"nicTemplateUrl": "[concat(variables('templateBaseUrl'), 'NetworkInterface.json')]"
 	},
-	"resources": [
-		{
+	"resources": [{
 			"apiVersion": "2017-05-10",
 			"name": "VnetDeployment",
 			"type": "Microsoft.Resources/deployments",
@@ -431,7 +430,7 @@
 			},
 			"dependsOn": [
 				"VnetDeployment",
-				"SubnetDeployment"
+				"SubnetDeployment",
 				"FirewallSubnetDeployment"
 			]
 		},
