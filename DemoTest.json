@@ -452,7 +452,7 @@
 		},
 		{
 			"apiVersion": "2017-05-10",
-			"name": "vmssDeployment",
+			"name": "VmssDeployment",
 			"type": "Microsoft.Resources/deployments",
 			"properties": {
 				"mode": "Incremental",
@@ -497,7 +497,12 @@
 						"value": "[parameters('lbName')]"
 					}
 				}
-			}
+			},
+			"dependsOn": [
+				"VnetDeployment",
+				"SubnetDeployment",
+				"LbDeployment"
+			]
 		}
 	]
 }
