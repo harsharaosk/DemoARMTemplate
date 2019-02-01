@@ -407,7 +407,7 @@
 						"value": "[parameters('publicIPAddressName')]"
 					},
 					"publicIPAllocationMethod": {
-						"value": "[parameters('publicIPAddressName')]"
+						"value": "[parameters('publicIPAllocationMethod')]"
 					},
 					"vmssName": {
 						"value": "[parameters('vmssName')]"
