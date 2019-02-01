@@ -287,7 +287,7 @@
 		},
 		{
 			"apiVersion": "2017-05-10",
-			"name": "nsgDeployment",
+			"name": "NsgDeployment",
 			"type": "Microsoft.Resources/deployments",
 			"properties": {
 				"mode": "Incremental",
@@ -330,7 +330,7 @@
 		},
 		{
 			"apiVersion": "2017-05-10",
-			"name": "routeTableDeployment",
+			"name": "RouteTableDeployment",
 			"type": "Microsoft.Resources/deployments",
 			"properties": {
 				"mode": "Incremental",
@@ -379,13 +379,13 @@
 			},
 			"dependsOn": [
 				"VnetDeployment",
-				"nsgDeployment",
-				"routeTableDeployment"
+				"NsgDeployment",
+				"RouteTableDeployment"
 			]
 		},
 		{
 			"apiVersion": "2017-05-10",
-			"name": "firewallSubnetDeployment",
+			"name": "FirewallSubnetDeployment",
 			"type": "Microsoft.Resources/deployments",
 			"properties": {
 				"mode": "Incremental",
@@ -431,34 +431,13 @@
 			},
 			"dependsOn": [
 				"VnetDeployment",
-				"firewallSubnetDeployment"
+				"SubnetDeployment"
+				"FirewallSubnetDeployment"
 			]
 		},
 		{
 			"apiVersion": "2017-05-10",
-			"name": "storageAccountDeployment",
-			"type": "Microsoft.Resources/deployments",
-			"properties": {
-				"mode": "Incremental",
-				"templateLink": {
-					"uri": "[variables('storageAccountTemplateUrl')]"
-				},
-				"parameters": {
-					"storageAccountName": {
-						"value": "[parameters('storageAccountName')]"
-					},
-					"storageAccountType": {
-						"value": "[parameters('storageAccountType')]"
-					},
-					"storageAccountKind": {
-						"value": "[parameters('storageAccountKind')]"
-					}
-				}
-			}
-		},
-		{
-			"apiVersion": "2017-05-10",
-			"name": "lbDeployment",
+			"name": "LbDeployment",
 			"type": "Microsoft.Resources/deployments",
 			"properties": {
 				"mode": "Incremental",
