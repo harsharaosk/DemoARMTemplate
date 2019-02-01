@@ -184,71 +184,6 @@
 			"metadata": {
 				"description": "Name of the Virtual Machine Scale Set"
 			}
-		},
-		"vmSku": {
-			"type": "string",
-			"allowedValues": [
-				"Standard_D14",
-				"Standard_D1_v2",
-				"Standard_D2_v2",
-				"Standard_D3_v2",
-				"Standard_D4_v2",
-				"Standard_D5_v2",
-				"Standard_D11_v2",
-				"Standard_D12_v2",
-				"Standard_D13_v2",
-				"Standard_D14_v2",
-				"Standard_M8-2ms"
-			],
-			"defaultValue": "Standard_A1",
-			"metadata": {
-				"description": "App VM size to provision. See https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs"
-			}
-		},
-		"instanceCount": {
-			"type": "int",
-			"metadata": {
-				"description": "Number of VM instances (100 or less)."
-			},
-			"defaultValue": 2,
-			"maxValue": 100
-		},
-		"adminUsername": {
-			"type": "string",
-			"metadata": {
-				"description": "Admin username on all VMs."
-			}
-		},
-		"adminPassword": {
-			"type": "securestring",
-			"metadata": {
-				"description": "Admin password on all VMs."
-			}
-		},
-		"imageReference.publisher": {
-			"type": "string",
-			"metadata": {
-				"description": "Name of the image publisher"
-			}
-		},
-		"imageReference.offer": {
-			"type": "string",
-			"metadata": {
-				"description": "Version of the image"
-			}
-		},
-		"imageReference.sku": {
-			"type": "string",
-			"metadata": {
-				"description": "Sku of the image specified"
-			}
-		},
-		"imageReference.version": {
-			"type": "string",
-			"defaultValue": "latest",
-			"metadata": {
-				"description": "Version of the image"
-			}
 		}
 	},
 	"variables": {
@@ -470,49 +405,6 @@
 					},
 					"publicIPAddressName": {
 						"value": "[parameters('publicIPAddressName')]"
-					}
-				}
-			}
-		},
-		{
-			"apiVersion": "2017-05-10",
-			"name": "vmssDeployment",
-			"type": "Microsoft.Resources/deployments",
-			"properties": {
-				"mode": "Incremental",
-				"templateLink": {
-					"uri": "[variables('vmssTemplateUrl')]"
-				},
-				"parameters": {
-					"vmSku": {
-						"value": "[parameters('vmSku')]"
-					},
-					"vmssName": {
-						"value": "[parameters('vmssName')]"
-					},
-					"instanceCount": {
-						"value": "[parameters('instanceCount')]"
-					},
-					"adminUsername": {
-						"value": "[parameters('adminUsername')]"
-					},
-					"adminPassword": {
-						"value": "[parameters('adminPassword')]"
-					},
-					"imageReference.publisher": {
-						"value": "[parameters('imageReference.publisher')]"
-					},
-					"imageReference.offer": {
-						"value": "[parameters('imageReference.offer')]"
-					},
-					"imageReference.sku": {
-						"value": "[parameters('imageReference.sku')]"
-					},
-					"imageReference.version": {
-						"value": "[parameters('imageReference.version')]"
-					},
-					"lbName": {
-						"value": "[parameters('lbName')]"
 					}
 				}
 			}
