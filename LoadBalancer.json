@@ -16,14 +16,14 @@
     },
     "publicIPAllocationMethod": {
       "type": "string",
-      "defaultValue":"dynamic",
+      "defaultValue": "dynamic",
       "metadata": {
         "description": "Name of the Load Balancer"
       }
     },
     "vmssName": {
       "type": "string",
-      "defaultValue":"dynamic",
+      "defaultValue": "dynamic",
       "metadata": {
         "description": "Name of the Load Balancer"
       }
@@ -34,76 +34,80 @@
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
     "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
     "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
-    "lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]"
+    "lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
+    "loadBalancerFrontEndName": "loadBalancerFrontEnd",
+    "loadBalancerBackEndName": "loadBalancerBackEnd",
+    "loadBalancerProbeName": "loadBalancerHttpProbe",
+    "loadBalancerNatPoolName": "loadBalancerNatPool"
   },
   "resources": [
     {
-      "apiVersion": "2016-03-30",
-      "name": "[parameters('lbName')]",
       "type": "Microsoft.Network/loadBalancers",
+      "name": "[parameters('lbName')]",
       "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
       "dependsOn": [
-        "[variables('publicIPAddressID')]"
+        "[parameters('publicIPAddressName')]"
       ],
       "properties": {
         "frontendIPConfigurations": [
           {
-            "name": "LoadBalancerFrontEnd",
+            "name": "[variables('loadBalancerFrontEndName')]",
             "properties": {
               "publicIPAddress": {
-                "id": "[variables('publicIPAddressID')]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
               }
             }
           }
         ],
         "backendAddressPools": [
           {
-            "name": "BackendPool1"
-          }
-        ],
-        "inboundNatRules": [
-          {
-            "name": "ssh",
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[variables('frontEndIPConfigID')]"
-              },
-              "protocol": "tcp",
-              "frontendPortRangeStart": 50000,
-              "frontendPortRangeEnd": 50019,
-              "backendPort": 22
-            }
+            "name": "[variables('loadBalancerBackendName')]"
           }
         ],
         "loadBalancingRules": [
           {
-            "name": "LBRule",
+            "name": "roundRobinLBRule",
             "properties": {
               "frontendIPConfiguration": {
-                "id": "[variables('frontEndIPConfigID')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('lbName')), '/frontendIPConfigurations/', variables('loadBalancerFrontEndName'))]"
               },
               "backendAddressPool": {
-                "id": "[variables('lbPoolID')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('lbName')), '/backendAddressPools/', variables('loadBalancerBackendName'))]"
               },
-              "protocol": "tcp",
+              "protocol": "Tcp",
               "frontendPort": 80,
               "backendPort": 80,
               "enableFloatingIP": false,
               "idleTimeoutInMinutes": 5,
               "probe": {
-                "id": "[variables('lbProbeID')]"
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('lbName')), '/probes/', variables('loadBalancerProbeName'))]"
               }
             }
           }
         ],
         "probes": [
           {
-            "name": "tcpProbe",
+            "name": "[variables('loadBalancerProbeName')]",
             "properties": {
-              "protocol": "tcp",
+              "protocol": "Tcp",
               "port": 80,
               "intervalInSeconds": 5,
               "numberOfProbes": 2
+            }
+          }
+        ],
+        "inboundNatPools": [
+          {
+            "name": "[variables('loadBalancerNatPoolName')]",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('lbName')), '/frontendIPConfigurations/', variables('loadBalancerFrontEndName'))]"
+              },
+              "protocol": "tcp",
+              "frontendPortRangeStart": 50000,
+              "frontendPortRangeEnd": 50019,
+              "backendPort": 22
             }
           }
         ]
@@ -123,4 +127,3 @@
     }
   ]
 }
-  
