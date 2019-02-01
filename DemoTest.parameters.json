@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "vnetName": {
-      "value": "testvnet"
+      "value": "demovnet"
     },
     "vnetAddressPrefix": {
       "value": "10.200.0.0/16"
     },
     "nsgName": {
-      "value": "subnet1-nsg"
+      "value": "demosubnet1-nsg"
     },
     "securityRules.Name": {
       "value": "ssh-access"
