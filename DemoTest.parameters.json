@@ -60,13 +60,37 @@
       "value": "StorageV2"
     },
     "vmssName": {
-      "value": "demovmss"
+      "value": "demovmss1"
     },
     "lbName": {
-      "value": "demovmss-lb"
+      "value": "demovmss1-lb"
     },
     "publicIPAddressName": {
-      "value": "demovmss-pip"
+      "value": "demovmss1-pip"
+    },
+    "vmSku": {
+      "value": "Standard_D2_v2"
+    },
+    "instanceCount": {
+      "value": 2
+    },
+    "adminUsername": {
+      "value": "serveradmin"
+    },
+    "adminPassword": {
+      "value":"x%bPB47La7Ld"
+    },
+    "imageReference.publisher": {
+      "value": "Canonical"
+    },
+    "imageReference.offer": {
+      "value": "UbuntuServer"
+    },
+    "imageReference.sku": {
+      "value": "16.04-LTS"
+    },
+    "imageReference.version": {
+      "value": "latest"
     }
   }
 }
