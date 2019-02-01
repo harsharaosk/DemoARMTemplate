@@ -69,7 +69,7 @@
       "value": "demovmss-pip"
     },
     "vmSku": {
-      "value": "Standard_M8-2ms"
+      "value": "Standard_D1_v2"
     },
     "instanceCount": {
       "value": 2
