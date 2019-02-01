@@ -67,6 +67,35 @@
     },
     "publicIPAddressName": {
       "value": "demovmss-pip"
+    },
+    "vmSku": {
+      "value": "Standard_M8-2ms"
+    },
+    "instanceCount": {
+      "value": 2
+    },
+    "adminUsername": {
+      "value": "serveradmin"
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/686aa72d-4cbd-4651-a3ef-c712895aa458/resourceGroups/Admin/providers/Microsoft.KeyVault/vaults/testarmkeyvaultarch"
+        },
+        "secretName": "adminPassword"
+      }
+    },
+    "imageReference.publisher": {
+      "value": "Canonical"
+    },
+    "imageReference.offer": {
+      "value": "UbuntuServer"
+    },
+    "imageReference.sku": {
+      "value": "16.04-LTS"
+    },
+    "imageReference.version": {
+      "value": "latest"
     }
   }
 }
