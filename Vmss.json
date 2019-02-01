@@ -141,7 +141,7 @@
 											"name": "ipconfig",
 											"properties": {
 												"subnet": {
-													"id": "[resourceId([resourceGroup().location], 'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+													"id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
 												},
 												"loadBalancerBackendAddressPools": [
 													{
