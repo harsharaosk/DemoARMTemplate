@@ -65,9 +65,6 @@
     "lbName": {
       "value": "demovmss1-lb"
     },
-    "publicIPAddressName": {
-      "value": "demovmss1-pip"
-    },
     "vmSku": {
       "value": "Standard_D2_v2"
     },
