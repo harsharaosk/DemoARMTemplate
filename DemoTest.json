@@ -491,6 +491,9 @@
 					"uri": "[variables('vmssTemplateUrl')]"
 				},
 				"parameters": {
+					"vnetName": {
+						"value": "[parameters('vnetName')]"
+					},
 					"vmSku": {
 						"value": "[parameters('vmSku')]"
 					},
