@@ -121,7 +121,7 @@
       "properties": {
         "publicIPAllocationMethod": "[parameters('publicIPAllocationMethod')]",
         "dnsSettings": {
-          "domainNameLabel": "[toLower(parameters('vmssName'))]"
+          "domainNameLabel": "[concat(parameters('vmssName'),'dns')]"
         }
       }
     }
