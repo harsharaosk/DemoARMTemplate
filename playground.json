@@ -1,0 +1,46 @@
+{
+    "apiVersion": "2017-05-10",
+    "name": "vmssDeployment",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+            "uri": "[variables('vmssTemplateUrl')]"
+        },
+        "parameters": {
+            "vmSku": {
+                "value": "[parameters('vmSku')]"
+            },
+            "vmssName": {
+                "value": "[parameters('vmssName')]"
+            },
+            "instanceCount": {
+                "value": "[parameters('instanceCount')]"
+            },
+            "adminUsername": {
+                "value": "[parameters('adminUsername')]"
+            },
+            "adminPassword": {
+                "value": "[parameters('adminPassword')]"
+            },
+            "imageReference.publisher": {
+                "value": "[parameters('imageReference.publisher')]"
+            },
+            "imageReference.offer": {
+                "value": "[parameters('imageReference.offer')]"
+            },
+            "imageReference.sku": {
+                "value": "[parameters('imageReference.sku')]"
+            },
+            "imageReference.version": {
+                "value": "[parameters('imageReference.version')]"
+            },
+            "lbName": {
+                "value": "[parameters('lbName')]"
+            }
+        }
+    },
+    "dependsOn": [
+        "lbDeployment"
+    ]
+}

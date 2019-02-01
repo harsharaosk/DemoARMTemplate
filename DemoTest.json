@@ -494,6 +494,9 @@
 					"vnetName": {
 						"value": "[parameters('vnetName')]"
 					},
+					"subnetName": {
+						"value": "[parameters('subnetName')]"
+					},
 					"vmSku": {
 						"value": "[parameters('vmSku')]"
 					},

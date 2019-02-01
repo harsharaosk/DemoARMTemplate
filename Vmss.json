@@ -85,6 +85,12 @@
 			"metadata": {
 				"description": "Name of the Load Balancer"
 			}
+		},
+		"subnetName": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Load Balancer"
+			}
 		}
 	},
 	"variables":{
