@@ -79,6 +79,12 @@
 			"metadata": {
 				"description": "Name of the Load Balancer"
 			}
+		},
+		"vnetName": {
+			"type": "string",
+			"metadata": {
+				"description": "Name of the Load Balancer"
+			}
 		}
 	},
 	"variables":{
