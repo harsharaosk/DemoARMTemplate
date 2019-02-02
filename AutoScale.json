@@ -2,6 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "vmssName": {
+			"type": "string",
+			"metadata": {
+				"description": "Globally unique dns name for the scale set. Must be 3-61 characters in length and globally unique across Azure."
+			},
+			"maxLength": 61
+		},
     "capacity.minimum": {
       "type": "int",
       "metadata": {

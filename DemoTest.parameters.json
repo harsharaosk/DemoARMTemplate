@@ -88,6 +88,21 @@
     },
     "imageReference.version": {
       "value": "latest"
+    },
+    "capacity.minimum": {
+      "value": 2
+    },
+    "capacity.maximum": {
+      "value": 6
+    },
+    "capacity.default": {
+      "value": 2
+    },
+    "metricTrigger.increaseThreshold": {
+      "value": 75
+    },
+    "metricTrigger.decreaseThreshold": {
+      "value": 20
     }
   }
 }
