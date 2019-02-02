@@ -340,10 +340,7 @@
 						"value": "[parameters('diskSizeGB')]"
 					}
 				}
-			},
-			"dependsOn": [
-				"VmssDeployment"
-			]
+			}
 		}
 	]
 }
