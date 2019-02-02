@@ -24,7 +24,7 @@
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachineScaleSets/extensions",
-            "name": "OMSExtension",
+            "name": "[concat(parameters('vmssName'),'/','OMSExtension')]",
             "apiVersion": "2018-06-01",
             "location": "[resourceGroup().location]",
             "metadata": {
