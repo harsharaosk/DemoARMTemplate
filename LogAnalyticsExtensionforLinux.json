@@ -32,7 +32,6 @@
             },
             "properties": {
                 "publisher": "Microsoft.EnterpriseCloud.Monitoring",
-                "targetResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/',  resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmssName'))]",
                 "type": "OmsAgentForLinux",
                 "typeHandlerVersion": "1.7",
                 "autoUpgradeMinorVersion": true,
