@@ -296,7 +296,7 @@
         },
         "diskSizeGB": {
             "type": "int",
-            "deafultValue": 1023,
+            "defaultValue": 1023,
             "metadata": {
                 "description": "The sku Name of the Data Disk"
             }
