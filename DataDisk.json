@@ -26,7 +26,7 @@
     "resources": [
         {
             "type": "Microsoft.Compute/disks",
-            "name": "[concat(parameters('vmssName'),'/',(parameters('vmssName'),'-datadisk1')]",
+            "name": "[concat(parameters('vmssName'),'-datadisk1')]",
             "apiVersion": "2017-03-30",
             "location": "[resourceGroup().location]",
             "sku": {
